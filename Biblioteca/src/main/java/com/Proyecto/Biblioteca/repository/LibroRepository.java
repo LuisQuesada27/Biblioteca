@@ -5,6 +5,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
+import com.Proyecto.Biblioteca.model.Libro;
+
 import java.util.List;
 
 
@@ -19,4 +22,7 @@ public interface LibroRepository extends JpaRepository<Libro, Long> {
     // Contar ejemplares disponibles de un libro
     @Query("SELECT COUNT(e) FROM Ejemplar e WHERE e.libro.id = :libroId AND e.prestado = false")
     int countEjemplaresDisponibles(@Param("libroId") Long libroId);
+
+     // Verificar existencia por ISBN
+    boolean existsByIsbn(String isbn);
 }
